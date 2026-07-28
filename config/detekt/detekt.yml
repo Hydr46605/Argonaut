@@ -1,0 +1,29 @@
+# Argonaut Detekt policy — strict defaults with documented, justified deviations.
+build:
+  maxIssues: 0
+
+complexity:
+  LongParameterList:
+    # Compose functions legitimately mirror wide UI state shapes.
+    functionThreshold: 8
+    constructorThreshold: 12
+    ignoreDefaultParameters: true
+  TooManyFunctions:
+    # Test fakes and screen scaffolds orchestrate several related concerns.
+    thresholdInFiles: 16
+    thresholdInClasses: 16
+
+style:
+  MagicNumber:
+    # dp values, animation durations and protocol constants read better inline
+    # than wrapped in consts everywhere in UI code.
+    active: false
+  MaxLineLength:
+    maxLineLength: 140
+  ThrowsCount:
+    max: 6
+
+naming:
+  TopLevelPropertyNaming:
+    # UI constants like navigation routes stay readable at the top level.
+    active: false

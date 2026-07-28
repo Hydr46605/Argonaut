@@ -1,0 +1,44 @@
+# --- Gradle ---
+.gradle/
+build/
+dist/
+
+# --- Kotlin / IDE ---
+.kotlin/
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+
+# --- Logs & dumps ---
+*.log
+hs_err_pid*
+replay_pid*
+
+# --- OS noise ---
+.DS_Store
+Thumbs.db
+
+# --- Local machine config ---
+local.properties
+
+# --- Security: never commit signing material or credentials ---
+keystore.properties
+keystore/
+*.jks
+*.keystore
+.env
+*.env
+
+# --- Android ---
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+!app/build/outputs/**/*.apk
+!app/build/outputs/**/*.aab
