@@ -1,0 +1,87 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Argonaut</string>
+    <string name="app_tagline">Il registro, con stile.</string>
+
+    <!-- Login -->
+    <string name="login_subtitle">Inserisci le credenziali di Argo ScuolaNext per continuare.</string>
+    <string name="login_school_code">Codice scuola</string>
+    <string name="login_username">Nome utente</string>
+    <string name="login_password">Password</string>
+    <string name="login_password_visibility">Mostra password</string>
+    <string name="login_button">Accedi</string>
+    <string name="login_error_invalid_credentials">Credenziali non valide. Controlla i dati e riprova.</string>
+    <string name="login_error_network">Impossibile raggiungere Argo. Verifica la connessione e riprova.</string>
+    <string name="login_error_generic">Accesso non riuscito. Riprova tra poco.</string>
+    <string name="login_credentials_saved_hint">La sessione verrà salvata in modo sicuro sul dispositivo.</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_media_generale">Media generale</string>
+    <string name="dashboard_recent_grades">Ultimi voti</string>
+    <string name="dashboard_schedule">Oggi</string>
+    <string name="dashboard_schedule_empty">Nessuna lezione oggi.</string>
+    <string name="dashboard_absences">Assenze e note</string>
+    <plurals name="dashboard_absences_count">
+        <item quantity="one">%1$d assenza</item>
+        <item quantity="other">%1$d assenze</item>
+    </plurals>
+    <plurals name="dashboard_reminders_count">
+        <item quantity="one">%1$d promemoria</item>
+        <item quantity="other">%1$d promemoria</item>
+    </plurals>
+    <string name="dashboard_absences_empty">Nessuna assenza da giustificare.</string>
+    <string name="dashboard_no_grades">Non ci sono ancora voti pubblicati.</string>
+    <string name="dashboard_refresh">Aggiorna</string>
+    <string name="dashboard_error_session">La sessione è scaduta. Accedi di nuovo.</string>
+    <string name="dashboard_error_network">Impossibile contattare Argo. Verifica la connessione.</string>
+    <string name="dashboard_error_server">Argo ha risposto in modo inatteso. Riprova tra poco.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_appearance">Aspetto</string>
+    <string name="settings_dynamic_color">Colori dinamici</string>
+    <string name="settings_dynamic_color_summary">Usa i colori del wallpaper su Android 12+</string>
+    <string name="settings_dark_mode">Tema scuro</string>
+    <string name="settings_dark_mode_system">Sistema</string>
+    <string name="settings_dark_mode_light">Chiaro</string>
+    <string name="settings_dark_mode_dark">Scuro</string>
+    <string name="settings_widgets">Widget</string>
+    <string name="settings_widget_refresh">Frequenza aggiornamento widget</string>
+    <string name="settings_widget_refresh_15">Ogni 15 minuti</string>
+    <string name="settings_widget_refresh_30">Ogni 30 minuti</string>
+    <string name="settings_widget_refresh_60">Ogni ora</string>
+    <string name="settings_widget_refresh_180">Ogni 3 ore</string>
+    <string name="settings_widget_refresh_summary">Gli aggiornamenti avvengono in background con WorkManager.</string>
+    <string name="settings_widget_student_name">Mostra nome studente</string>
+    <string name="settings_widget_student_name_summary">Mostra il nome e la classe nei widget Media.</string>
+    <string name="settings_about">Informazioni</string>
+    <string name="settings_logout">Esci</string>
+    <string name="settings_logout_confirm_title">Uscire da Argonaut?</string>
+    <string name="settings_logout_confirm_body">La sessione salvata sul dispositivo verrà eliminata. Dovrai accedere di nuovo.</string>
+    <string name="settings_logout_cancel">Annulla</string>
+    <string name="settings_logout_confirm">Esci</string>
+    <string name="settings_logged_in_as">Accesso: %1$s</string>
+
+    <!-- About -->
+    <string name="about_title">Informazioni</string>
+    <string name="about_version">Versione %1$s</string>
+    <string name="about_source">Codice sorgente</string>
+    <string name="about_credits_title">Crediti</string>
+    <string name="about_credits_body">Argonaut è costruito su Argos, il client Kotlin open source per le API Argo ScuolaNext, e usa Jetpack Compose e Material 3.</string>
+    <string name="about_disclaimer_title">Disclaimer</string>
+    <string name="about_disclaimer_body" tools:ignore="Typos">Argonaut non è affiliato ad Argo Software. È un client non ufficiale: i dati visualizzati provengono dai servizi Argo e potrebbero subire modifiche in qualsiasi momento.</string>
+    <string name="about_license">Licenza MIT</string>
+
+    <!-- Widgets -->
+    <string name="widget_grade_label">Media Argonaut</string>
+    <string name="widget_schedule_label">Orario Argonaut</string>
+    <string name="widget_bulletin_label">Bacheca Argonaut</string>
+    <string name="widget_media_label">Media Argonaut</string>
+    <string name="widget_grades_label">Voti Argonaut</string>
+    <string name="widget_bulletin_heading">Bacheca</string>
+    <string name="widget_no_data">Nessun dato disponibile</string>
+
+    <!-- Common -->
+    <string name="common_retry">Riprova</string>
+    <string name="back">Indietro</string>
+</resources>
