@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+' # CalVer tags: v2026.08.0
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build signed release and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Argonaut
+        uses: actions/checkout@v4
+
+      # Same composite-build requirement as CI: Argos must sit at ../Argos.
+      - name: Checkout Argos (sibling composite build)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/Argos
+          path: Argos
+          token: ${{ secrets.ARGOS_CHECKOUT_TOKEN || github.token }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Signing material never lives in the repo: keystore.properties is
+      # assembled from secrets and the keystore itself is decoded from base64.
+      # Configure these secrets in the repository settings:
+      #   KEYSTORE_BASE64, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD
+      - name: Write signing properties
+        run: |
+          echo "storeFile=release.keystore.jks" > keystore.properties
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> keystore.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> keystore.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> keystore.properties
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.keystore.jks
+
+      - name: Build signed APK and AAB
+        run: |
+          ./gradlew :app:assembleRelease :app:bundleRelease --no-daemon --console=plain
+          # Cheap sanity gate: the artifacts exist and are non-empty.
+          test -s app/build/outputs/apk/release/app-release.apk
+          test -s app/build/outputs/bundle/release/app-release.aab
+
+      - name: Extract release notes from changelog
+        id: notes
+        run: |
+          # The version tag vYYYY.MM.MICRO maps onto the "## [YYYY.MM.MICRO]" heading.
+          VERSION="${GITHUB_REF_NAME#v}"
+          # Match either "## [v.YYYY]" or "## [v.YYYY] — date".
+          awk -v v="$VERSION" '
+            index($0, "## [" v "]") == 1 { capture = 1; next }
+            capture && /^\s*## / { exit }
+            capture { print }
+          ' CHANGELOG.md > release-notes.md
+          test -s release-notes.md || echo "No changelog section for $VERSION; using a fallback title." >&2
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            app/build/outputs/apk/release/app-release.apk \
+            app/build/outputs/bundle/release/app-release.aab \
+            --title "Argonaut $GITHUB_REF_NAME" \
+            --notes-file release-notes.md
